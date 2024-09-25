@@ -10,6 +10,7 @@ async function bootstrap() {
         stopAtFirstError: true,
     }));
     const configService = app.get(config_1.ConfigService);
+    app.setGlobalPrefix('api-movies');
     await app.listen(configService.get('PORT') || 3000);
 }
 bootstrap();

@@ -5,12 +5,15 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
-  app.useGlobalPipes(new ValidationPipe({
-    stopAtFirstError: true,
-  }));
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      stopAtFirstError: true,
+    }),
+  );
 
   const configService = app.get(ConfigService);
+  app.setGlobalPrefix('api-movies');
   await app.listen(configService.get<number>('PORT') || 3000);
 }
 bootstrap();
